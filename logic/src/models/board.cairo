@@ -1,5 +1,4 @@
 use starknet::ContractAddress;
-use array:: ArrayTrait;
 
 #[derive(Model, Drop, Serde)]
 struct Board {
@@ -7,6 +6,7 @@ struct Board {
     game_id: u32,
     slots: u32,
 }
+
 
 trait BoardTrait {
     fn new_board(game_id: u32) -> Board;

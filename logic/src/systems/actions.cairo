@@ -111,36 +111,36 @@ mod actions {
     }
 }
 
-fn check_win(slots: u32) -> bool {
-    let slot_0 = slots / 100000000;
-    let slot_1 = (slots % 100000000) / 10000000;
-    let slot_2 = (slots % 10000000) / 1000000;
-    let slot_3 = (slots % 1000000) / 100000;
-    let slot_4 = (slots % 100000) / 10000;
-    let slot_5 = (slots % 10000) / 1000;
-    let slot_6 = (slots % 1000) / 100;
-    let slot_7 = (slots % 100) / 10;
-    let slot_8 = slots % 10;
+    fn check_win(slots: u32) -> bool {
+        let slot_0 = slots / 100000000;
+        let slot_1 = (slots % 100000000) / 10000000;
+        let slot_2 = (slots % 10000000) / 1000000;
+        let slot_3 = (slots % 1000000) / 100000;
+        let slot_4 = (slots % 100000) / 10000;
+        let slot_5 = (slots % 10000) / 1000;
+        let slot_6 = (slots % 1000) / 100;
+        let slot_7 = (slots % 100) / 10;
+        let slot_8 = (slots % 10) / 1;
 
-    if slot_0 == slot_1 && slot_1 == slot_2 && slot_2 != 1 {
-        return true;
-    } else if slot_3 == slot_4 && slot_4 == slot_5 && slot_5 != 1 {
-        return true;
-    } else if slot_6 == slot_7 && slot_7 == slot_8 && slot_8 != 1 {
-        return true;
-    } else if slot_0 == slot_3 && slot_3 == slot_6 && slot_6 != 1 {
-        return true;
-    } else if slot_1 == slot_4 && slot_4 == slot_7 && slot_7 != 1 {
-        return true;
-    } else if slot_2 == slot_5 && slot_5 == slot_8 && slot_8 != 1 {
-        return true;
-    } else if slot_0 == slot_4 && slot_4 == slot_8 && slot_8 != 1 {
-        return true;
-    } else if slot_2 == slot_4 && slot_4 == slot_6 && slot_6 != 1 {
-        return true;
+        if slot_0 == slot_1 && slot_1 == slot_2 && slot_2 != 1 {
+            return true;
+        } else if slot_3 == slot_4 && slot_4 == slot_5 && slot_5 != 1 {
+            return true;
+        } else if slot_6 == slot_7 && slot_7 == slot_8 && slot_8 != 1 {
+            return true;
+        } else if slot_0 == slot_3 && slot_3 == slot_6 && slot_6 != 1 {
+            return true;
+        } else if slot_1 == slot_4 && slot_4 == slot_7 && slot_7 != 1 {
+            return true;
+        } else if slot_2 == slot_5 && slot_5 == slot_8 && slot_8 != 1 {
+            return true;
+        } else if slot_0 == slot_4 && slot_4 == slot_8 && slot_8 != 1 {
+            return true;
+        } else if slot_2 == slot_4 && slot_4 == slot_6 && slot_6 != 1 {
+            return true;
+        }
+        return false;
     }
-    return false;
-}
 
 // fn get_array(
 //     slot_1: u32, 
