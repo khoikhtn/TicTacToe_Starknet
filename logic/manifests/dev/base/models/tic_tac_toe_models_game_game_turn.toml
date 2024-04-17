@@ -1,0 +1,15 @@
+kind = "DojoModel"
+class_hash = "0x40aa679128c7b1e54324f7d7311b367c3c03e3ed545c6fbf708f09096b3896b"
+original_class_hash = "0x40aa679128c7b1e54324f7d7311b367c3c03e3ed545c6fbf708f09096b3896b"
+abi = "manifests/dev/abis/base/models/tic_tac_toe_models_game_game_turn.json"
+name = "tic_tac_toe::models::game::game_turn"
+
+[[members]]
+name = "game_id"
+type = "u32"
+key = true
+
+[[members]]
+name = "player_symbol"
+type = "Symbol"
+key = false

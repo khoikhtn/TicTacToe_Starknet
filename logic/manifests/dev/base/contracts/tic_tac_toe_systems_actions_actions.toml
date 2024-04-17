@@ -1,0 +1,9 @@
+kind = "DojoContract"
+class_hash = "0x34b3001860364d4c4276f20b5d193150ff79ddf3ee0e2d288be330dc53ea411"
+original_class_hash = "0x34b3001860364d4c4276f20b5d193150ff79ddf3ee0e2d288be330dc53ea411"
+base_class_hash = "0x0"
+abi = "manifests/dev/abis/base/contracts/tic_tac_toe_systems_actions_actions.json"
+reads = []
+writes = []
+computed = []
+name = "tic_tac_toe::systems::actions::actions"

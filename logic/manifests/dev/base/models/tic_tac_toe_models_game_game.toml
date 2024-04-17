@@ -1,0 +1,25 @@
+kind = "DojoModel"
+class_hash = "0x4997e9ba8a45a7eed2adb59d2b867ea9eccecfb3488ade0cab698fd08072ecb"
+original_class_hash = "0x4997e9ba8a45a7eed2adb59d2b867ea9eccecfb3488ade0cab698fd08072ecb"
+abi = "manifests/dev/abis/base/models/tic_tac_toe_models_game_game.json"
+name = "tic_tac_toe::models::game::game"
+
+[[members]]
+name = "game_id"
+type = "u32"
+key = true
+
+[[members]]
+name = "winner"
+type = "Symbol"
+key = false
+
+[[members]]
+name = "cross"
+type = "ContractAddress"
+key = false
+
+[[members]]
+name = "circle"
+type = "ContractAddress"
+key = false

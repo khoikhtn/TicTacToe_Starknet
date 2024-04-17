@@ -1,0 +1,111 @@
+[world]
+kind = "Contract"
+class_hash = "0x799bc4e9da10bfb3dd88e6f223c9cfbf7745435cd14f5d69675ea448e578cd"
+original_class_hash = "0x799bc4e9da10bfb3dd88e6f223c9cfbf7745435cd14f5d69675ea448e578cd"
+abi = "abis/deployments/dojo_world_world.json"
+address = "0x2ae4f22faea88b6e51d23fdf907ca12be8e48ef73693b6e9f4d8fc42549f5d2"
+transaction_hash = "0x676fe3f52a576dbddefeeaa34ea56a8fb5c17841faf6d651cab0a59eae28737"
+block_number = 3
+seed = "tic_tac_toe"
+name = "dojo::world::world"
+
+[base]
+kind = "Class"
+class_hash = "0x679177a2cb757694ac4f326d01052ff0963eac0bc2a17116a2b87badcdf6f76"
+original_class_hash = "0x679177a2cb757694ac4f326d01052ff0963eac0bc2a17116a2b87badcdf6f76"
+name = "dojo::base::base"
+
+[[contracts]]
+kind = "DojoContract"
+address = "0xbcd9d04d05a815e5774b5b5a992a4653e18151c3eb6a7d90e72647a5592e26"
+class_hash = "0x34b3001860364d4c4276f20b5d193150ff79ddf3ee0e2d288be330dc53ea411"
+original_class_hash = "0x34b3001860364d4c4276f20b5d193150ff79ddf3ee0e2d288be330dc53ea411"
+base_class_hash = "0x679177a2cb757694ac4f326d01052ff0963eac0bc2a17116a2b87badcdf6f76"
+abi = "abis/deployments/contracts/tic_tac_toe_systems_actions_actions.json"
+reads = []
+writes = []
+computed = []
+name = "tic_tac_toe::systems::actions::actions"
+
+[[models]]
+kind = "DojoModel"
+class_hash = "0x5c15f937054ade8ae8528835bf91e194a73ea4c35aeb806c70fed428a5e91d4"
+original_class_hash = "0x5c15f937054ade8ae8528835bf91e194a73ea4c35aeb806c70fed428a5e91d4"
+abi = "abis/deployments/models/tic_tac_toe_models_board_board.json"
+name = "tic_tac_toe::models::board::board"
+
+[[models.members]]
+name = "game_id"
+type = "u32"
+key = true
+
+[[models.members]]
+name = "slots"
+type = "u32"
+key = false
+
+[[models]]
+kind = "DojoModel"
+class_hash = "0x4997e9ba8a45a7eed2adb59d2b867ea9eccecfb3488ade0cab698fd08072ecb"
+original_class_hash = "0x4997e9ba8a45a7eed2adb59d2b867ea9eccecfb3488ade0cab698fd08072ecb"
+abi = "abis/deployments/models/tic_tac_toe_models_game_game.json"
+name = "tic_tac_toe::models::game::game"
+
+[[models.members]]
+name = "game_id"
+type = "u32"
+key = true
+
+[[models.members]]
+name = "winner"
+type = "Symbol"
+key = false
+
+[[models.members]]
+name = "cross"
+type = "ContractAddress"
+key = false
+
+[[models.members]]
+name = "circle"
+type = "ContractAddress"
+key = false
+
+[[models]]
+kind = "DojoModel"
+class_hash = "0x40aa679128c7b1e54324f7d7311b367c3c03e3ed545c6fbf708f09096b3896b"
+original_class_hash = "0x40aa679128c7b1e54324f7d7311b367c3c03e3ed545c6fbf708f09096b3896b"
+abi = "abis/deployments/models/tic_tac_toe_models_game_game_turn.json"
+name = "tic_tac_toe::models::game::game_turn"
+
+[[models.members]]
+name = "game_id"
+type = "u32"
+key = true
+
+[[models.members]]
+name = "player_symbol"
+type = "Symbol"
+key = false
+
+[[models]]
+kind = "DojoModel"
+class_hash = "0x3af95a89b3832fa94f03c0d699d05fe58ed698cd8f2f1a60bfa55aa0c18d402"
+original_class_hash = "0x3af95a89b3832fa94f03c0d699d05fe58ed698cd8f2f1a60bfa55aa0c18d402"
+abi = "abis/deployments/models/tic_tac_toe_models_player_player.json"
+name = "tic_tac_toe::models::player::player"
+
+[[models.members]]
+name = "game_id"
+type = "u32"
+key = true
+
+[[models.members]]
+name = "address"
+type = "ContractAddress"
+key = true
+
+[[models.members]]
+name = "symbol"
+type = "Symbol"
+key = false

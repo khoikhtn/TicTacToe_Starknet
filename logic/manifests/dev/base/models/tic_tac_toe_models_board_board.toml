@@ -1,0 +1,15 @@
+kind = "DojoModel"
+class_hash = "0x5c15f937054ade8ae8528835bf91e194a73ea4c35aeb806c70fed428a5e91d4"
+original_class_hash = "0x5c15f937054ade8ae8528835bf91e194a73ea4c35aeb806c70fed428a5e91d4"
+abi = "manifests/dev/abis/base/models/tic_tac_toe_models_board_board.json"
+name = "tic_tac_toe::models::board::board"
+
+[[members]]
+name = "game_id"
+type = "u32"
+key = true
+
+[[members]]
+name = "slots"
+type = "u32"
+key = false
