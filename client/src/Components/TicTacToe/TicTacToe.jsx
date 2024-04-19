@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import './TicTacToe.css'
 import circle_icon from '../Assets/circle.png'
 import cross_icon from '../Assets/cross.png'
-import { setupNetwork, SpawnGame, callMove } from '../../dojo/setupNetwork'
+// import { setupNetwork, SpawnGame, callMove } from '../../dojo/setupNetwork'
 
 let data = ["", "", "", "", "", "", "", "", ""];
 
@@ -11,19 +11,20 @@ const TicTacToe = () => {
   let [count, setCount] = useState(0);
   let [lock, setLock] = useState(false);
   let titleRef = useRef(null);
+  let [occupied, setOccupied] = useState(new Array(9).fill(false));
 
   const [playerAddressess, setPlayerAddresses] = useState({ cross_player: "", circle_player: "" });
   const [player, setPlayer] = useState(playerAddressess.cross_player);
   const [gameId, setGameId] = useState(1);
 
-  const network = setupNetwork();
+  // const network = setupNetwork();
 
-  useEffect(() => {
-    
-    SpawnGame(network).then(addresses => {
-      setPlayerAddresses(addresses);
-    })
-  }, [])
+  // useEffect(() => {
+
+  //   SpawnGame(network).then(addresses => {
+  //     setPlayerAddresses(addresses);
+  //   })
+  // }, [])
 
   let box1 = useRef(null);
   let box2 = useRef(null);
@@ -42,6 +43,19 @@ const TicTacToe = () => {
       return 0;
     }
 
+    console.log(occupied);
+
+    if (occupied[num] === true) {
+      console.log('slot occupied');
+      return 0;
+    } else {
+      setOccupied(prevOccupied => {
+        const updatedOccupied = [...prevOccupied];
+        updatedOccupied[num] = true;
+        return updatedOccupied;
+      })
+    }
+
     if (count % 2 === 0) {
       e.target.innerHTML = `<img src='${cross_icon}'>`;
       data[num] = 'x';
@@ -52,7 +66,7 @@ const TicTacToe = () => {
       setCount(++count);
     }
 
-    await callMove(num, player, gameId, network);
+    // await callMove(num, player, gameId, network);
     
     // Change player
     if (player === playerAddressess.cross_player) {
@@ -99,6 +113,12 @@ const TicTacToe = () => {
     titleRef.current.innerHTML = 'Tic Tac Toe';
     box_array.map((e) => {
       e.current.innerHTML = "";
+    })
+
+    setOccupied(prevOccupied => {
+      const resetOccupied = prevOccupied.map(() => false);
+
+      return resetOccupied;
     })
   }
 

@@ -5,6 +5,7 @@ struct Board {
     #[key]
     game_id: u32,
     slots: u32,
+    occupied: u32,
 }
 
 
@@ -19,6 +20,7 @@ impl BoardImpl of BoardTrait {
         Board {
             game_id: game_id,
             slots: 111111111,
+            occupied: 111111111,
         }
     }
 }

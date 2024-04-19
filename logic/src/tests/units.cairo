@@ -11,9 +11,11 @@ mod tests {
     fn setup_world() -> (IWorldDispatcher,IActionsDispatcher) {
         let mut models = array![
             game::TEST_CLASS_HASH,
+            board::TEST_CLASS_HASH,
             player::TEST_CLASS_HASH,
             game_turn::TEST_CLASS_HASH,
         ];
+
         let world = spawn_test_world(models);
 
         let contract_address = world.deploy_contract('salt',actions::TEST_CLASS_HASH.try_into().unwrap());
@@ -24,30 +26,40 @@ mod tests {
     fn test_init_board() {
         let circle = starknet::contract_address_const::<0x01>();
         let cross = starknet::contract_address_const::<0x02>();
-        let (world,actions_system) =setup_world();
+        let (world,actions_system) = setup_world();
 
-        let game_id = actions_system.spawn(cross,circle);
+        let game_id = actions_system.spawn(cross, circle);
 
-        let game = get!(world,game_id,(Game));
-        let game_turn = get!(world,game_id,(GameTurn));
-        assert!(game_turn.player_symbol == Symbol::Cross,"should be Cross");
-        assert!(game.circle == circle,"circle address is incorrect");
-        assert!(game.cross == cross,"cross address is incorrect");
+        let game = get!(world, game_id, (Game));
+        let game_turn = get!(world, game_id, (GameTurn));
+        assert!(game_turn.player_symbol == Symbol::Cross, "should be Cross");
+        assert!(game.circle == circle, "circle address is incorrect");
+        assert!(game.cross == cross, "cross address is incorrect");
         
     }
     #[test] 
     fn test_play() {
         let circle = starknet::contract_address_const::<0x01>();
         let cross = starknet::contract_address_const::<0x02>();
-        let (world,actions_system) =setup_world();
+        let (world,actions_system) = setup_world();
 
         let game_id = actions_system.spawn(cross,circle);
         let game = get!(world,game_id,(Game));
+        let board = get!(world, game_id, (Board));
+
+        // Cross goes into slot_0
+        actions_system.move(0, cross.into(), game_id);
+        assert!(board.slots == 211111111, "This board should be 211111111");
+
+        // Check turn changed
         let game_turn = get!(world,game_id,(GameTurn));
+        assert!(game_turn.player_symbol == Symbol::Circle, "Should be circle");
 
-        actions_system.move(1,cross.into(),game_id);
-        assert!();
-
+        // Circle goes into slot_1
+        // actions_system.move(1, circle.into(), game_id);
+        // let slot_1 = (board.occupied % 100000000) / 10000000;
+        // assert!(slot_1 == 1, "This slot should be 3");
     }
+
 
 }
