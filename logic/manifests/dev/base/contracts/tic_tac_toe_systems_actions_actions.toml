@@ -1,6 +1,6 @@
 kind = "DojoContract"
-class_hash = "0x5111fcd145f9c937cb53949eebad9798682771106bf8f7e5055cc67ad1f119e"
-original_class_hash = "0x5111fcd145f9c937cb53949eebad9798682771106bf8f7e5055cc67ad1f119e"
+class_hash = "0x36259e296449cc6508753d84a95003660f976095fc30efb7c6f6946ef610647"
+original_class_hash = "0x36259e296449cc6508753d84a95003660f976095fc30efb7c6f6946ef610647"
 base_class_hash = "0x0"
 abi = "manifests/dev/abis/base/contracts/tic_tac_toe_systems_actions_actions.json"
 reads = []

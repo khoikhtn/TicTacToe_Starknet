@@ -8,7 +8,7 @@ trait IActions {
 
 #[dojo::contract]
 mod actions {
-    use super::{IActions, check_win, check_occupied, occupy_slot, number_retrieved};
+    use super::{IActions, check_win, check_occupied, occupy_slot, build_up_slots, number_retrieved};
     use starknet::{ContractAddress, get_caller_address};
     use array::ArrayTrait;
 
@@ -84,28 +84,10 @@ mod actions {
                 target = target + 2;
             }
 
-            let mut i: u32 = 0;
-            let mut new_slots: u32 = 1;
-
-            loop {
-                if i > 7 {
-                    if next_position == 8 {
-                        new_slots = new_slots + target;
-                    }
-
-                    break ();
-                }
-
-                if i == next_position {
-                    new_slots = new_slots + target;
-                }
-
-                new_slots = new_slots * 10 + 1;
-                i = i + 1;
-            };
-
+            let new_slots = build_up_slots(board.slots, next_position, target);
             board.slots = new_slots;
-            set!(world, (board));
+
+            set!(world,(board));
 
             if check_win(new_slots) {
                 set!(
@@ -203,6 +185,44 @@ fn check_win(slots: u32) -> bool {
     }
 
     return false;
+}
+
+fn build_up_slots(slots: u32, next_position: u32, target: u32) -> u32 {
+    let (slot_0, slot_1, slot_2, slot_3, slot_4, slot_5, slot_6, slot_7, slot_8) = number_retrieved(slots);
+
+    let mut array = ArrayTrait::new();
+    array.append(slot_0);
+    array.append(slot_1);
+    array.append(slot_2);
+    array.append(slot_3);
+    array.append(slot_4);
+    array.append(slot_5);
+    array.append(slot_6);
+    array.append(slot_7);
+    array.append(slot_8);
+
+    let mut i: u32 = 0;
+    let mut new_slots: u32 = *array.at(i);
+
+    loop {
+        if i > 7 {
+            if next_position == 8 {
+                new_slots = new_slots + target;
+            }
+
+            break();
+        }
+
+        if i == next_position {
+            new_slots = new_slots + target;
+        }
+
+        new_slots = new_slots * 10;
+        i = i + 1;
+        new_slots = new_slots + *array.at(i);
+    };
+
+    return new_slots;
 }
 
 fn number_retrieved (slots: u32) -> (u32, u32, u32, u32, u32, u32, u32, u32, u32) {

@@ -41,25 +41,27 @@ mod tests {
     fn test_play() {
         let circle = starknet::contract_address_const::<0x01>();
         let cross = starknet::contract_address_const::<0x02>();
-        let (world,actions_system) = setup_world();
+        let (world, actions_system) = setup_world();
 
         let game_id = actions_system.spawn(cross,circle);
-        let game = get!(world,game_id,(Game));
-        let board = get!(world, game_id, (Board));
 
         // Cross goes into slot_0
         actions_system.move(0, cross.into(), game_id);
+        let board = get!(world, game_id, (Board));
         assert!(board.slots == 211111111, "This board should be 211111111");
 
         // Check turn changed
-        let game_turn = get!(world,game_id,(GameTurn));
+        let game_turn = get!(world, game_id,(GameTurn));
         assert!(game_turn.player_symbol == Symbol::Circle, "Should be circle");
 
         // Circle goes into slot_1
-        // actions_system.move(1, circle.into(), game_id);
-        // let slot_1 = (board.occupied % 100000000) / 10000000;
-        // assert!(slot_1 == 1, "This slot should be 3");
+        actions_system.move(1, circle.into(), game_id);
+        let board = get!(world, game_id, (Board));
+        assert!(board.slots == 231111111, "This board should be 231111111");
+        
+        // Cross goes into slot_6
+        actions_system.move(6, cross.into(), game_id);
+        let board = get!(world, game_id, (Board));
+        assert!(board.slots == 231111211, "This board should be 231111211");
     }
-
-
 }
