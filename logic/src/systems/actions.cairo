@@ -3,7 +3,7 @@ use starknet::ContractAddress;
 #[dojo::interface]
 trait IActions {
     fn spawn(cross_address: ContractAddress, circle_address: ContractAddress) -> u32;
-    fn move(next_position: u32, caller: ContractAddress, game_id: u32);
+    fn move(game_id: u32, next_position: u32, caller: ContractAddress);
 }
 
 #[dojo::contract]
@@ -55,10 +55,10 @@ mod actions {
         }
 
         fn move(
-            world: IWorldDispatcher, 
+            world: IWorldDispatcher,
+            game_id: u32,
             next_position: u32, 
             caller: ContractAddress, 
-            game_id: u32
         ) {
 
             // check out of range

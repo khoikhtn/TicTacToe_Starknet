@@ -10,7 +10,7 @@ export const KATANA_RPC = "http://localhost:5050/";
 export function setup() {
   const provider = new RpcProvider({ nodeUrl: KATANA_RPC });
 
-  const signer = new Account (
+  const signer = new Account(
     provider,
     KATANA_ACCOUNT_ADDRESS,
     KATANA_ACCOUNT_PRIVATE_KEY
@@ -44,7 +44,7 @@ export async function SpawnGame({ provider, signer }: { provider: RpcProvider; s
   return { cross_player, circle_player }
 }
 
-export async function callMove(next_position: number, caller: String, game_id: number, {provider, signer}:{provider: RpcProvider, signer: Account}) {
+export async function callMove(game_id: number, next_position: number, caller: String, { provider, signer }: { provider: RpcProvider, signer: Account }) {
   const contractCallData = new CallData(abi);
   const system_contract = new Contract(abi, WORLD_CONTRACT_ADDRESS, provider);
   system_contract.connect(signer);
@@ -52,16 +52,16 @@ export async function callMove(next_position: number, caller: String, game_id: n
   await system_contract.invoke(
     'move',
     contractCallData.compile('move', {
+      game_id: game_id,
       next_position: next_position,
       caller: caller,
-      game_id: game_id
     }), {
       maxFee: 0,
     }
   )
 }
 
-function generateRandomHexString(length = 32) {
+function generateRandomHexString(length = 16) {
   const allowedChars = '0123456789abcdef';
 
   // Loop until a valid random value is generated
@@ -73,6 +73,12 @@ function generateRandomHexString(length = 32) {
     }
   } while (parseInt(randomString, 16) === 0); // Check if the value is zero
 
-  // Prefix the string with "0x"
-  return `0x${randomString}`;
+  const encoder = new TextEncoder();
+  const strB = encoder.encode(randomString);
+  return BigInt(
+    strB.reduce((memo, byte) => {
+      memo += byte.toString(16);
+      return memo;
+    }, "0x")
+  ).toString();
 }

@@ -87,16 +87,16 @@
         "name": "move",
         "inputs": [
           {
+            "name": "game_id",
+            "type": "core::integer::u32"
+          },
+          {
             "name": "next_position",
             "type": "core::integer::u32"
           },
           {
             "name": "caller",
             "type": "core::starknet::contract_address::ContractAddress"
-          },
-          {
-            "name": "game_id",
-            "type": "core::integer::u32"
           }
         ],
         "outputs": [],

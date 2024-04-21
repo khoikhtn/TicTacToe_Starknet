@@ -18,8 +18,8 @@ name = "dojo::base::base"
 [[contracts]]
 kind = "DojoContract"
 address = "0xbcd9d04d05a815e5774b5b5a992a4653e18151c3eb6a7d90e72647a5592e26"
-class_hash = "0x36259e296449cc6508753d84a95003660f976095fc30efb7c6f6946ef610647"
-original_class_hash = "0x36259e296449cc6508753d84a95003660f976095fc30efb7c6f6946ef610647"
+class_hash = "0x16c94e82a81e5bfca007f15d61185e45ad96cc118393d55493447a4d5eeaed8"
+original_class_hash = "0x16c94e82a81e5bfca007f15d61185e45ad96cc118393d55493447a4d5eeaed8"
 base_class_hash = "0x679177a2cb757694ac4f326d01052ff0963eac0bc2a17116a2b87badcdf6f76"
 abi = "abis/deployments/contracts/tic_tac_toe_systems_actions_actions.json"
 reads = []

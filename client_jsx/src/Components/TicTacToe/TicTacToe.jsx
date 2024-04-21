@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import './TicTacToe.css'
 import circle_icon from '../Assets/circle.png'
 import cross_icon from '../Assets/cross.png'
-import { setup, SpawnGame, callMove } from "../../dojo/setupNetwork";
+import { setup, SpawnGame, callMove } from "../../dojo/setupNetwork.ts";
 
 let data = ["", "", "", "", "", "", "", "", ""];
 
@@ -20,9 +20,9 @@ const TicTacToe = () => {
   const network = setup();
 
   const spawnGame = async () => {
-    const { cross_player, circle_player, game_id } = await SpawnGame(network);
+    const { cross_player, circle_player } = await SpawnGame(network);
     setPlayerAddresses({ cross_player, circle_player });
-    setGameId(game_id);
+    //setGameId(game_id);
   }
 
   useEffect(() => {
