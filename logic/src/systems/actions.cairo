@@ -20,8 +20,8 @@ mod actions {
     impl IActionsImpl of IActions<ContractState> {
 
         fn spawn(
-            world: IWorldDispatcher, 
-            cross_address: ContractAddress, 
+            world: IWorldDispatcher,
+            cross_address: ContractAddress,
             circle_address: ContractAddress
         ) -> u32 {
             let game_id = world.uuid();
@@ -74,6 +74,11 @@ mod actions {
                 panic!("Position has been occupied");
             } else {
                 occupy_slot(next_position, ref board.occupied);
+            }
+
+            // check_win
+            if check_win(board.slots) {
+                panic!("The game is over");
             }
             
             let mut target = 0;
@@ -238,28 +243,3 @@ fn number_retrieved (slots: u32) -> (u32, u32, u32, u32, u32, u32, u32, u32, u32
 
     return (slot_0, slot_1, slot_2, slot_3, slot_4, slot_5, slot_6, slot_7, slot_8);
 }
-
-// fn get_array(
-//     slot_1: u32, 
-//     slot_2: u32,
-//     slot_3: u32,
-//     slot_4: u32,
-//     slot_5: u32,
-//     slot_6: u32,
-//     slot_7: u32,
-//     slot_8: u32,
-//     slot_9: u32,
-// ) -> Array<u32> {
-//     let mut numbers = ArrayTrait::new();
-//     numbers.append(slot_1);
-//     numbers.append(slot_2);
-//     numbers.append(slot_3);
-//     numbers.append(slot_4);
-//     numbers.append(slot_5);
-//     numbers.append(slot_6);
-//     numbers.append(slot_7);
-//     numbers.append(slot_8);
-//     numbers.append(slot_9);
-
-//     numbers
-// }

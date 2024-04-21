@@ -54,14 +54,33 @@ mod tests {
         let game_turn = get!(world, game_id,(GameTurn));
         assert!(game_turn.player_symbol == Symbol::Circle, "Should be circle");
 
-        // Circle goes into slot_1
-        actions_system.move(1, circle.into(), game_id);
+        // Circle goes into slot_4
+        actions_system.move(4, circle.into(), game_id);
         let board = get!(world, game_id, (Board));
-        assert!(board.slots == 231111111, "This board should be 231111111");
+        assert!(board.slots == 211131111, "This board should be 211131111");
         
-        // Cross goes into slot_6
-        actions_system.move(6, cross.into(), game_id);
+        // Cross goes into slot_1
+        actions_system.move(1, cross.into(), game_id);
         let board = get!(world, game_id, (Board));
-        assert!(board.slots == 231111211, "This board should be 231111211");
+        assert!(board.slots == 221131111, "This board should be 211131111");
+
+        // Circle goes into slot_5
+        actions_system.move(5, circle.into(), game_id);
+        let board = get!(world, game_id, (Board));
+        assert!(board.slots == 221133111, "This board should be 221133111");
+
+        // Cross goes into slot_2
+        actions_system.move(2, cross.into(), game_id);
+        let board = get!(world, game_id, (Board));
+        assert!(board.slots == 222133111, "This board should be 222133111");
+
+        // Check winner
+        let game = get!(world, game_id, (Game));
+        assert!(game.winner == Symbol::Cross, "Winner should be cross");
+
+        // Circle goes into slot_6 but the game is already over
+        // actions_system.move(6, circle.into(), game_id);
+        // let board = get!(world, game_id, (Board));
+        // assert!(board.slots == 222133311, "This board should be 222133311");
     }
 }

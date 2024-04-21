@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import './TicTacToe.css'
 import circle_icon from '../Assets/circle.png'
 import cross_icon from '../Assets/cross.png'
-// import { setupNetwork, SpawnGame, callMove } from '../../dojo/setupNetwork'
+import { setup, SpawnGame, callMove } from "../../dojo/setupNetwork";
 
 let data = ["", "", "", "", "", "", "", "", ""];
 
@@ -17,14 +17,17 @@ const TicTacToe = () => {
   const [player, setPlayer] = useState(playerAddressess.cross_player);
   const [gameId, setGameId] = useState(1);
 
-  // const network = setupNetwork();
+  const network = setup();
 
-  // useEffect(() => {
+  const spawnGame = async () => {
+    const { cross_player, circle_player, game_id } = await SpawnGame(network);
+    setPlayerAddresses({ cross_player, circle_player });
+    setGameId(game_id);
+  }
 
-  //   SpawnGame(network).then(addresses => {
-  //     setPlayerAddresses(addresses);
-  //   })
-  // }, [])
+  useEffect(() => {
+    spawnGame();
+  }, [])
 
   let box1 = useRef(null);
   let box2 = useRef(null);
@@ -66,7 +69,7 @@ const TicTacToe = () => {
       setCount(++count);
     }
 
-    // await callMove(num, player, gameId, network);
+    await callMove(num, player, gameId, network);
     
     // Change player
     if (player === playerAddressess.cross_player) {
@@ -108,6 +111,8 @@ const TicTacToe = () => {
   }
 
   const reset = () => {
+    spawnGame();
+
     setLock(false);
     data = ["", "", "", "", "", "", "", "", ""];
     titleRef.current.innerHTML = 'Tic Tac Toe';

@@ -7,7 +7,7 @@ export const WORLD_CONTRACT_ADDRESS = "0x2ae4f22faea88b6e51d23fdf907ca12be8e48ef
 export const KATANA_RPC = "http://localhost:5050/";
 
 
-export function setupNetwork() {
+export function setup() {
   const provider = new RpcProvider({ nodeUrl: KATANA_RPC });
 
   const signer = new Account (
@@ -41,7 +41,7 @@ export async function SpawnGame({ provider, signer }: { provider: RpcProvider; s
     }
   )
 
-  return {cross_player, circle_player}
+  return { cross_player, circle_player }
 }
 
 export async function callMove(next_position: number, caller: String, game_id: number, {provider, signer}:{provider: RpcProvider, signer: Account}) {
