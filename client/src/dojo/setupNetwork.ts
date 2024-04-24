@@ -10,7 +10,7 @@ export const KATANA_RPC = "http://localhost:5050/";
 export function setup() {
   const provider = new RpcProvider({ nodeUrl: KATANA_RPC });
 
-  const signer = new Account(
+  const myAccount = new Account(
     provider,
     KATANA_ACCOUNT_ADDRESS,
     KATANA_ACCOUNT_PRIVATE_KEY
@@ -18,17 +18,17 @@ export function setup() {
 
   return {
     provider,
-    signer,
+    myAccount,
   }
 }
 
-export async function SpawnGame({ provider, signer }: { provider: RpcProvider; signer: Account }) {
+export async function SpawnGame({ provider, myAccount }: { provider: RpcProvider; myAccount: Account }) {
   const cross_player = generateRandomHexString();
   const circle_player = generateRandomHexString();
 
   const contractCallData = new CallData(abi);
   const system_contract = new Contract(abi, WORLD_CONTRACT_ADDRESS, provider);
-  system_contract.connect(signer);
+  system_contract.connect(myAccount);
 
   await system_contract.invoke(
     'spawn',
@@ -44,21 +44,18 @@ export async function SpawnGame({ provider, signer }: { provider: RpcProvider; s
   return { cross_player, circle_player }
 }
 
-export async function callMove(game_id: number, next_position: number, caller: String, { provider, signer }: { provider: RpcProvider, signer: Account }) {
+export async function callMove(game_id: number, next_position: number, caller: String, { provider, myAccount }: { provider: RpcProvider, myAccount: Account }) {
   const contractCallData = new CallData(abi);
   const system_contract = new Contract(abi, WORLD_CONTRACT_ADDRESS, provider);
-  system_contract.connect(signer);
+  system_contract.connect(myAccount);
 
-  await system_contract.invoke(
-    'move',
-    contractCallData.compile('move', {
-      game_id: game_id,
-      next_position: next_position,
-      caller: caller,
-    }), {
-      maxFee: 0,
-    }
-  )
+  const myCall = system_contract.populate("move", {
+    game_id: game_id,
+    next_position: next_position,
+    caller: caller,
+  });
+
+  const res = myAccount.execute(myCall);
 }
 
 function generateRandomHexString(length = 16) {

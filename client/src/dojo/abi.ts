@@ -80,7 +80,7 @@ export const abi = [
             "type": "core::integer::u32"
           }
         ],
-        "state_mutability": "view"
+        "state_mutability": "external"
       },
       {
         "type": "function",
@@ -100,7 +100,7 @@ export const abi = [
           }
         ],
         "outputs": [],
-        "state_mutability": "view"
+        "state_mutability": "external"
       }
     ]
   },
